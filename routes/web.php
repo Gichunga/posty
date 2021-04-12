@@ -15,8 +15,11 @@ use App\Http\Controllers\PostsController;
 |
 */
 
-Route::get('/', [PostsController::class, 'index'])->name('home');
 
 Auth::routes();
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+// Posts
+Route::get('/', [PostsController::class, 'index'])->name('home');
+Route::get('/create', [PostsController::class, 'create'])->name('create');
