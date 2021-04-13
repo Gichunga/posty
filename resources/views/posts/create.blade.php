@@ -10,7 +10,7 @@
   </div>
   <div class="card-body">
 
-      <form action="/posts" method="POST">
+      <form action="/posts" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
               <label for="title">Title</label>
@@ -20,10 +20,12 @@
               <label for="body">Body</label>
               <textarea name="body" id="body" class="form-control" placeholder="Body content" cols="30" rows="10"></textarea>
           </div>
+          <div class="form-group ">
+              <input type="file" name="cover_image" id="image">
+          </div>
           <div class="form-group">
               <input class="btn btn-primary" type="submit" value="Publish Post">
           </div>
-
       </form>
   </div>
 </div>

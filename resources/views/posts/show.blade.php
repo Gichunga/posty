@@ -19,7 +19,7 @@
                             @csrf
                             @method('DELETE')
                             <input type="submit"  class="btn btn-danger btn-sm pull-right" value="DELETE">
-                        </form>
+                        </form><a class="card-body" href="/posts/{{$post->id}}">
                         <a href="/posts/{{$post->id}}/edit" class="btn btn-primary btn-sm d-inline">Edit <i class="fas fa-edit"></i></a>    
                     </span>
                 @endif

@@ -44,8 +44,15 @@ class PostsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|min:4',
-            'body' => 'required|'
+            'body' => 'required|',
+            'cover_image' => 'nullable|max:1999'
         ]);
+
+        //check for file upload
+        if($request->hasFile('cover_image'))
+        {
+            
+        }
 
         $post = new Post;
         $post->title = $request->input('title');
