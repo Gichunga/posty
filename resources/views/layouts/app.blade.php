@@ -35,8 +35,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">
-                            <a href="{{ route('home') }}">
+                        <li class="nav-link {{ request()->routeIs('posts.index') ? 'active' : '' }}">
+                            <a href="{{ route('posts.index') }}">
                                 <span>Home</span>
                             </a>
                         </li>
@@ -47,8 +47,8 @@
                             </a>
                         </li>
 
-                        <li class="nav-link {{ request()->routeIs('create') ? 'active' : '' }}">
-                            <a href="{{ route('create') }}" >
+                        <li class="nav-link {{ request()->routeIs('posts.create') ? 'active' : '' }}">
+                            <a href="{{ route('posts.create') }}" >
                                 <span >Create</span>
                             </a>
                         </li>
@@ -97,6 +97,7 @@
 
         <main class="py-4">
             <div class="container">
+                @include('incs.messages')
                 @yield('content')
             </div>
         </main>

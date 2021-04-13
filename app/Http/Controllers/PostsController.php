@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class PostsController extends Controller
 {
@@ -15,8 +16,11 @@ class PostsController extends Controller
     public function index()
     {
         // dd(Post::all());
-        $posts = Post::all();
-        return view('pages.index', compact('posts'));
+        // return Post::where('title', "Post 2")->get();
+        // return Post::all();
+        // return FacadesDB::select('SELECT * from posts');
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        return view('posts.index')->with('posts', $posts);
 
     }
 
@@ -27,7 +31,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('pages.create');
+        return view('posts.create');
     }
 
     /**
@@ -39,9 +43,16 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|min:3',
+            'title' => 'required|min:4',
             'body' => 'required|'
         ]);
+
+        $post = new Post;
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+
+        return redirect('posts')->with('success', 'Post Created Successfully');
 
         
     }
@@ -54,7 +65,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show')->with('post', $post);
     }
 
     /**
