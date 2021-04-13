@@ -21,5 +21,11 @@ Auth::routes();
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 // Posts
-Route::get('/', [PostsController::class, 'index'])->name('home');
-Route::get('/create', [PostsController::class, 'create'])->name('create');
+// Route::resource('posts', PostsController::class);
+Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
+Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
+Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.create');
+Route::get('/posts/{post}', [PostsController::class, 'show'])->name('posts.show');
+Route::patch('/posts/{post}', [PostsController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{post}', [PostsController::class, 'destroy'])->name('posts.destroy');
+Route::get('/posts/{post}/edit', [PostsController::class, 'edit'])->name('posts.edit');
