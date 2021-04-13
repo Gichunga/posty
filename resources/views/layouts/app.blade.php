@@ -41,12 +41,6 @@
                             </a>
                         </li>
 
-                        <li class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard') }}" >
-                                <span >Dashboard</span>
-                            </a>
-                        </li>
-
                         <li class="nav-link {{ request()->routeIs('posts.create') ? 'active' : '' }}">
                             <a href="{{ route('posts.create') }}" >
                                 <span >Create</span>
@@ -81,12 +75,16 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }} <i class="fas fa-power-off red"></i>
+                                        {{ __('Logout') }} <i class="fas fa-power-off"></i>
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
+                                        {{csrf_field()}}
                                     </form>
+
+                                    <a class="dropdown-item" href="{{ route('dashboard') }}" >
+                                        <span >{{__('Dashboard')}} <i class="fas fa-cogs"></i></span>
+                                    </a>
                                 </div>
                             </li>
                         @endguest
