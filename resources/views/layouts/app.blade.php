@@ -37,7 +37,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-link {{ request()->routeIs('posts.index') ? 'active' : '' }}">
                             <a href="{{ route('posts.index') }}">
-                                <span>Home</span>
+                                <span>Posts</span>
                             </a>
                         </li>
 

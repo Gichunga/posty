@@ -1,7 +1,7 @@
 @extends('layouts.app')
  
 @section('content')
-<div class="card col-md-8">
+<div class="card col-md-12 mx-auto">
   {{-- <div class="card-header">
     Featured
   </div> --}}
