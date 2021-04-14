@@ -14,7 +14,7 @@
                             <img style="width: 100%; height:100%; border-radius: 15px;" src="/storage/cover_images/{{ $post->cover_image }}" alt="">
                         </div>
                         <div class="col-md-8">
-                            {{ substr($post->body, 0, stripos($post->body, ' ', 500)) }} [...]
+                            {{ substr($post->body, 0, stripos($post->body, ' ', 800)) }} [...]
                         </div>
                     </div>  
                 </div>

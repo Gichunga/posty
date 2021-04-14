@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -45,7 +46,7 @@ class PostsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|min:4',
-            'body' => 'required|',
+            'body' => 'required|min:500',
             'cover_image' => 'nullable|max:1999'
         ]);
 
@@ -116,8 +117,8 @@ class PostsController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->validate($request, [
-            'title' => 'required|min:3',
-            'body' => 'required'
+            'title' => 'required|min:4',
+            'body' => 'required|min:500'
         ]);
 
         //check for file upload
@@ -160,6 +161,11 @@ class PostsController extends Controller
         {
             return redirect('/posts')->with('error', 'Unauthorized Page');
 
+        }
+
+        if($post->cover_image != 'noimage.jpg')
+        {
+            Storage::delete('public/cover_images/'.$post->cover_image);
         }
         $post->delete();
         return redirect('/posts')->with('success', 'Post deleted');
