@@ -20,6 +20,7 @@ class PostsController extends Controller
         // return Post::all();
         // return FacadesDB::select('SELECT * from posts');
         $posts = Post::orderBy('created_at', 'desc')->get();
+        // dd($posts);
         return view('posts.index')->with('posts', $posts);
 
     }
@@ -51,12 +52,25 @@ class PostsController extends Controller
         //check for file upload
         if($request->hasFile('cover_image'))
         {
+            // get filename with extension
+            $fileNameWithExtension = $request->file('cover_image')->getClientOriginalName();
+            // get just the filename
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            // get just the extension
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // add timestamp
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            //path to upload
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
             
+        }else{
+            $fileNameToStore = 'noimage.jpg';
         }
 
         $post = new Post;
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->cover_image = $fileNameToStore;
         $post->user_id = auth()->user()->id;
         $post->save();
 
@@ -105,9 +119,29 @@ class PostsController extends Controller
             'title' => 'required|min:3',
             'body' => 'required'
         ]);
+
+        //check for file upload
+        if($request->hasFile('cover_image'))
+        {
+            // get filename with extension
+            $fileNameWithExtension = $request->file('cover_image')->getClientOriginalName();
+            // get just the filename
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
+            // get just the extension
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // add timestamp
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            //path to upload
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+            
+        }
         
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        if($request->hasFile('cover_image'))
+        {
+            $post->cover_image = $fileNameToStore;
+        }
         // dd( $post);
         $post->save();
 

@@ -8,7 +8,11 @@
            
         </div>
         <div class="card-body">
-           {{$post->body}}
+            <div class="row">
+                <div class="col-md-12">
+                    {{$post->body}}
+                </div>
+            </div>  
         </div>
         <div class="card-footer">
             <p>By <b>{{ $post->user->name }}</b> {{ $post->created_at->diffForHumans() }}</p>

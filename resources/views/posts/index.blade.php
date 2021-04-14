@@ -9,7 +9,14 @@
                     <a class="card-body" href="/posts/{{$post->id}}"><strong>{{ $post->title }}</strong></a><br>
                 </div>
                 <div class="card-body">
-                    {{ substr($post->body, 0, stripos($post->body, ' ', 500)) }} [...]
+                    <div class="row">
+                        <div class="col-md-4" >
+                            <img style="width: 100%; height:100%; border-radius: 15px;" src="/storage/cover_images/{{ $post->cover_image }}" alt="">
+                        </div>
+                        <div class="col-md-8">
+                            {{ substr($post->body, 0, stripos($post->body, ' ', 500)) }} [...]
+                        </div>
+                    </div>  
                 </div>
                 <div class="card-footer">
                     <p>By <b>{{ $post->user->name }}</b> {{ $post->created_at->diffForHumans() }}</p>
